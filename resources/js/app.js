@@ -1,11 +1,15 @@
-//
-const editBtn = document.getElementById('edit-btn');
-const editModal = document.getElementById('edit-modal');
-const cancelEdit = document.getElementById('cancel-edit');
+const openModalBtn = document.getElementById('open-modal');
+const modal = document.getElementById('modal');
+const closeModalBtn = document.getElementById('close-modal');
 
-editBtn.addEventListener("click", () => {
-    editModal.style.display = "block";
+openModalBtn.addEventListener("click", () => {
+    modal.style.display = "block";
 });
-cancelEdit.addEventListener("click", () => {
-    editModal.style.display = "none";
+
+closeModalBtn.addEventListener("click", () => {
+    modal.style.display = "none";
 });
+
+if (modal?.dataset.openonError === "1") {
+    modal.style.display = "block";
+}

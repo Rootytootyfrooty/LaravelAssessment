@@ -7,6 +7,7 @@ use Illuminate\View\View;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class CompanyController extends Controller
 {
@@ -29,15 +30,56 @@ class CompanyController extends Controller
             'company' => $company,
         ]);
     }
+
+    public function store(Request $request) {
+        
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('companies', 'email')],
+            'website' => ['required', 'string', 'url', 'max:255', Rule::unique('companies', 'website')],
+            'logo' => ['required', 'image', 'mimes:png', 'max:2048'],
+        ]);
+
+
+        $company = Company::create($request->only('name', 'email', 'website'));
+
+        $request->file('logo')->storeAs(
+            'icons',
+            $company->id . '.png',
+            'public'
+        );
+
+
+        return redirect()->route('company.index');
+        }
+        //return to_route('company.index');
+
+
     public function update(Company $company, Request $request) {
-        //dd($request);
-        $validated = $request->validate([
+        $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('companies', 'email')->ignore($company)],
             'website' => ['required', 'string', 'url', 'max:255', Rule::unique('companies', 'website')->ignore($company)],
+            'logo' => ['required', 'image', 'mimes:png', 'max:2048'],
         ]);
-        //dd($validated);
-        $company->update($validated);
-        return redirect()->back();
+
+        $company->update($request->only('name', 'email', 'website'));
+
+        if ($request->hasFile('logo')) {
+            Storage::disk('public')->delete('icons/' . $company->id . '.png');
+
+            $request->file('logo')->storeAs(
+                'icons',
+                $company->id . '.png',
+                'public'
+            );
+        }
+        return redirect()->route('company.show', $company);
+    }
+
+    public function destroy(Company $company) {
+        $company->delete();
+
+        return to_route('company.index');
     }
 }

@@ -8,7 +8,7 @@
     </head>
     <body>
         <header>
-            <x-layout.nav />
+            <x-layout.nav/>
         </header>
         <main>
             {{ $slot }}

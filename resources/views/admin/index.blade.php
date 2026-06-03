@@ -17,6 +17,13 @@
             </div>
 
             <button type="submit" class="btn mt-2 h-10 w-full" data-test="login-button">Login</button>
+            @if ($errors->any())
+                <div>
+                    @foreach ($errors->all() as $error)
+                        <p class="text-error">{{ $error }}</p>
+                    @endforeach
+                </div>
+            @endif
 
             
     </div>

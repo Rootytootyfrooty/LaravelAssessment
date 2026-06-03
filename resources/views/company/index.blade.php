@@ -19,4 +19,5 @@
     <div>
         {{ $companies->links() }}
     </divs>
+    <x-cards.modal />
 </x-layout>
