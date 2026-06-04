@@ -4,19 +4,22 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\SessionsController;
 use App\Models\Company;
+use App\Models\Employee;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    $companies = Company::all();
+    $employees = Employee::all();
+    return view('welcome', compact('companies', 'employees'));
 });
 
-Route::get('/companies', [CompanyController::class, 'index'])->name('company.index');
+Route::get('/companies', [CompanyController::class, 'index'])->name('company.index')->middleware('auth');
 Route::post('/companies/store', [CompanyController::class, 'store'])->name('company.store')->middleware('auth');
 Route::get('/companies/{company}', [CompanyController::class, 'show'])->name('company.show')->middleware('auth');
 Route::patch('/companies/{company}', [CompanyController::class, 'update'])->name('company.update')->middleware('auth');
 Route::delete('/companies/{company}', [CompanyController::class, 'destroy'])->name('company.destroy')->middleware('auth');
 
-Route::get('/employees', [EmployeeController::class, 'index'])->name('employee.index');
+Route::get('/employees', [EmployeeController::class, 'index'])->name('employee.index')->middleware('auth');
 Route::post('/employees/store', [EmployeeController::class, 'store'])->name('employee.store')->middleware('auth');
 Route::get('/employees/{employee}', [EmployeeController::class, 'show'])->name('employee.show')->middleware('auth');
 Route::patch('/employees/{employee}', [EmployeeController::class, 'update'])->name('employee.update')->middleware('auth');

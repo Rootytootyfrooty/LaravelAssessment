@@ -20,9 +20,16 @@
         <li><a href="/companies">Companies</a></li>
         <li><a href="/employees">Employees</a></li>
         @auth
-        <button class="mx-4 btn btn-warning">
-          Add New
-        </button>
+        @if (request()->routeIs('company.index'))
+        <li><button id="open-modal-small">
+          Add New Company
+        </button></li>
+        @endif
+        @if (request()->routeIs('employee.index'))
+        <li><button id="open-modal-small">
+          Add New Employee
+        </button></li>
+        @endif
         <form action="/logout" method="POST">
           @csrf
           <li><button type="submit">Logout</button></li>

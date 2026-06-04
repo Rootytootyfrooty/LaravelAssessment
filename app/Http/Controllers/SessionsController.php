@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,7 +29,9 @@ class SessionsController extends Controller
         }
         $request->session()->regenerate();
 
-        return view('welcome');
+        $companies = Company::all();
+        $employees = Employee::all();
+        return view('welcome', compact('companies', 'employees'));
     }
 
     public function destroy(Request $request)
