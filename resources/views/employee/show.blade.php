@@ -1,21 +1,29 @@
-<x-layout>
+<x-layout title="{{ $employee->first_name }} {{ $employee->last_name }}">
     <div class="max-w-8/10 mx-auto flex-col">
-        <div class="flex align-center py-2 gap-x-4 justify-center">
-
+        <div class="flex items-center py-2 gap-x-4 justify-center">
             <h1 class="text-center text-5xl my-6 text-white">{{ $employee->first_name }} {{ $employee->last_name }}</h1>
         </div>
-        <div class="border rounded-md p-3">
-            <div class="flex flex-col items-center justify-center text-xl">
-                <p>Email: {{ $employee->email }}</p>
-                <p>Number: {{ $employee->number }}</p>
-                <a href="/companies/{{ $employee->company->id }}">Company: {{ $employee->company->name }}</a>
+        <div class="p-3 max-w-[750px] mx-auto">
+            <div class="flex flex-col items-center justify-center text-xl gap-4 text-center">
+                <div class="border rounded-md p-3 md:p-5 w-full flex flex-col md:flex-row gap-2">
+                    <strong>Email: </strong>
+                    <p class="break-all md:break-normal">{{ $employee->email }}</p>
+                </div>
+                <div class="border rounded-md p-5 w-full flex flex-col md:flex-row gap-2">
+                    <strong>Telephone number: </strong>
+                    <p class="break-all md:break-normal">{{ $employee->number }}</p>
+                </div>
+                <div class="border rounded-md p-5 w-full flex flex-col md:flex-row gap-2">
+                    <strong>Company: </strong>
+                    <a href="/companies/{{ $employee->company->id }}" class="break-all md:break-normal link-primary">{{ $employee->company->name }}</a>
+                </div>
             </div>
             @auth
             <div class="w-full flex justify-end mt-3">
                 <button id="open-modal" class="btn btn-accent ml-auto mr-0">Edit</button>
             </div>
-            </div>
-            <x-cards.employee-modal :companies="$companies" :employee="$employee"/>
+        </div>
+        <x-cards.employee-modal :companies="$companies" :employee="$employee"/>
             @endauth
     </div>
 </x-layout>

@@ -15,7 +15,7 @@
         class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
         <li><a href="/">Homepage</a></li>
         @guest
-        <li><a href="/login">Admin</a></li>
+        <li><a href="/login">Login</a></li>
         @endguest
         <li><a href="/companies">Companies</a></li>
         <li><a href="/employees">Employees</a></li>
@@ -45,7 +45,7 @@
   <div class="navbar-end gap-y-0">
     @guest
     <a href="/login" class="mx-4 btn hidden md:block pt-2 btn-accent">
-      Admin
+      Login
     </a>
     @endguest
     
@@ -53,12 +53,12 @@
     <div class="mx-4 hidden md:block">
 
       @if (request()->routeIs('company.index'))
-      <button id="open-modal" class="mx-4 btn btn-success">
+      <button id="open-modal" class="btn btn-success">
         Add New Company
       </button>
       @endif
       @if (request()->routeIs('employee.index'))
-      <button id="open-modal" class="mx-4 btn btn-success">
+      <button id="open-modal" class="btn btn-success">
         Add New Employee
       </button>
       @endif
@@ -67,7 +67,7 @@
 
     <form action="/logout" method="POST" class="mx-4 hidden md:block">
       @csrf
-      <button type="submit" class="mx-4 btn btn-warning">
+      <button type="submit" class="btn btn-warning">
         Logout
       </button>
     </form>

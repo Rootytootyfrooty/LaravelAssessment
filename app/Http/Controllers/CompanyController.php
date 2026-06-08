@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use App\Models\Company;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
@@ -16,7 +17,7 @@ class CompanyController extends Controller
         
         $sort = $request->query('sort', 'latest');
 
-        $companies = Company::withCount('employee')
+        $companies = Company::withCount('employees')
             ->sort($sort)
             ->paginate(10)
             ->withQueryString();
@@ -25,7 +26,7 @@ class CompanyController extends Controller
     }
     public function show(Company $company)
     {
-        $company->loadCount('employee');
+        $company->load(['employees'])->loadCount('employees');
         return view('company.show', [
             'company' => $company,
         ]);
@@ -60,7 +61,7 @@ class CompanyController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('companies', 'email')->ignore($company)],
             'website' => ['required', 'string', 'url', 'max:255', Rule::unique('companies', 'website')->ignore($company)],
-            'logo' => ['required', 'image', 'mimes:png', 'max:2048'],
+            'logo' => ['image', 'mimes:png', 'max:2048'],
         ]);
 
         $company->update($request->only('name', 'email', 'website'));

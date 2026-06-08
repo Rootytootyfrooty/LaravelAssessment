@@ -17,7 +17,7 @@ class Company extends Model
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
-    public function employee(): HasMany
+    public function employees(): HasMany
     {
         return $this->hasMany(Employee::class);
     }

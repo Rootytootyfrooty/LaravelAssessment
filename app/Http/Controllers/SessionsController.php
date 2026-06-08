@@ -29,9 +29,7 @@ class SessionsController extends Controller
         }
         $request->session()->regenerate();
 
-        $companies = Company::all();
-        $employees = Employee::all();
-        return view('welcome', compact('companies', 'employees'));
+        return redirect()->intended('/')->with('success', 'Successfully logged in');
     }
 
     public function destroy(Request $request)

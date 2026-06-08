@@ -18,7 +18,10 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'email' => 'admin@admin.com',
+            'password' => 'password',
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }

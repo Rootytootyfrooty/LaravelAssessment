@@ -27,7 +27,7 @@ class Employee extends Model
             'oldest' => $query->orderBy('created_at', 'asc'),
             'aToZ' => $query->orderBy('first_name', 'asc'),
             'zToA' => $query->orderBy('first_name', 'desc'),
-            'byCompany' => $query->orderBy('company'),
+            'byCompany' => $query->orderBy('company_id', 'desc'),
 
             default => $query->orderBy('created_at', 'desc'),
         };

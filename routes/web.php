@@ -11,7 +11,7 @@ Route::get('/', function () {
     $companies = Company::all();
     $employees = Employee::all();
     return view('welcome', compact('companies', 'employees'));
-});
+})->name('welcome');
 
 Route::get('/companies', [CompanyController::class, 'index'])->name('company.index')->middleware('auth');
 Route::post('/companies/store', [CompanyController::class, 'store'])->name('company.store')->middleware('auth');

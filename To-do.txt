@@ -1,0 +1,7 @@
+    >Make errors better/appear without opening the modal
+>all the tests
+>better sorting options
+>Dynamic titles, replace data finder
+>dynamic sorting options
+    >left side nav bar buttons spacing
+>
