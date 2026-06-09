@@ -1,7 +1,6 @@
 <x-layout title="Companies">
     <div class="max-w-8/10 mx-auto">
-        <h1 class="text-center text-5xl my-6 text-white">Companies</h1>
-        <x-sort />
+        <x-sort :sort="$sort" />
     </div>
     <div class="grid md:grid-cols-2 gap-6 m-6 max-w-8/10 mx-auto xl:max-w-[1150px]">
         @foreach ($companies as $company)

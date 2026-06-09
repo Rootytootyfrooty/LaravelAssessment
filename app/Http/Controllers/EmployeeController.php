@@ -10,8 +10,9 @@ use Illuminate\Validation\Rule;
 
 class EmployeeController extends Controller
 {
-    public function index(Request $request, Company $companies)
+    public function index(Request $request)
     {
+        //dd('index method hit', $request->all());
         $companies = Company::all();
 
         $sort = $request->query('sort', 'latest');
@@ -21,7 +22,7 @@ class EmployeeController extends Controller
             ->paginate(10)
             ->withQueryString();
         
-
+        //dd($sort);
         return view('employee.index', compact('employees', 'sort', 'companies'));
     }
 
@@ -34,6 +35,7 @@ class EmployeeController extends Controller
     }
 
     public function store(Request $request) {
+        //dd($request);
         $validated = $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],

@@ -39,10 +39,10 @@
     </div>
 
   </div>
-  <div class="navbar-center">
-    <a href="/" class="btn btn-ghost text-xl text-white">Data Finder</a>
+  <div class="navbar-center flex flex-col">
+    <a href="/" class="btn btn-ghost border border-border text-xl text-white">Home</a>
   </div>
-  <div class="navbar-end gap-y-0">
+  <div class="navbar-end">
     @guest
     <a href="/login" class="mx-4 btn hidden md:block pt-2 btn-accent">
       Login
@@ -53,12 +53,12 @@
     <div class="mx-4 hidden md:block">
 
       @if (request()->routeIs('company.index'))
-      <button id="open-modal" class="btn btn-success">
+      <button id="open-modal" class="btn btn-success" data-test="open-company-modal">
         Add New Company
       </button>
       @endif
       @if (request()->routeIs('employee.index'))
-      <button id="open-modal" class="btn btn-success">
+      <button id="open-modal" class="btn btn-success" data-test="open-employee-modal">
         Add New Employee
       </button>
       @endif

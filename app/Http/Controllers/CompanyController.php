@@ -21,7 +21,7 @@ class CompanyController extends Controller
             ->sort($sort)
             ->paginate(10)
             ->withQueryString();
-
+        
         return view('company.index', compact('companies', 'sort'));
     }
     public function show(Company $company)

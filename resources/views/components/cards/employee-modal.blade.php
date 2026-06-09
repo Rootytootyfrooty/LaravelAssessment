@@ -12,7 +12,7 @@
                 <h2 class="text-3xl">{{ $employee->exists ? 'Edit Employee' : 'Add New Employee' }}</h2>
                 <form 
                     method="POST" 
-                    enctype="multipart/form-data"
+                    
                     action="{{ $employee->exists ? route('employee.update', $employee) : route('employee.store') }}" 
                     class="flex flex-col">
                     @csrf
@@ -64,7 +64,7 @@
                             @endif
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary mt-4">Submit</button>
+                    <button type="submit" class="btn btn-primary mt-4" data-test="submit-employee-btn">Submit</button>
                 </form>
                 
                 <div class="mt-4 flex flex-row justify-between w-[309px]">

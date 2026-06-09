@@ -1,7 +1,7 @@
 <x-layout title="Employees">
     <div class="max-w-8/10 mx-auto">
-        <h1 class="text-center text-5xl my-6 text-white">Employees</h1>
-        <x-sort />
+        {{-- dd('index method hit', $request->all()); --}}
+        <x-sort :sort="$sort"/>
     </div>
 
     <div class="grid md:grid-cols-2 gap-6 m-6 max-w-8/10 xl:max-w-[1150px] mx-auto">

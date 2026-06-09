@@ -1,6 +1,6 @@
 <?php
 
-pest()->extend(Tests\DuskTestCase::class)
+pest()->extend(Tests\TestCase::class)
 //  ->use(Illuminate\Foundation\Testing\DatabaseMigrations::class)
     ->in('Browser');
 
@@ -19,8 +19,8 @@ use Tests\TestCase;
 */
 
 pest()->extend(TestCase::class)
- // ->use(RefreshDatabase::class)
-    ->in('Feature', 'Unit');
+ ->use(RefreshDatabase::class)
+    ->in('Feature', 'Unit', 'Browser');
 
 /*
 |--------------------------------------------------------------------------
