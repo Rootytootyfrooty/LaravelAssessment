@@ -1,19 +1,18 @@
 <x-layout title="{{ $company->name }}">
     <div class="max-w-8/10 mx-auto flex-col">
-        <div class="flex items-center py-2 gap-x-4 justify-center">
+        <div class="flex items-center py-2 my-4 gap-x-4 justify-center">
             <div class="fill-white my-auto text-white">
                 <img 
                 src="{{ asset('storage/icons/' . $company->id . '.png') }}" 
                 alt="Company Logo for {{ $company->name }}"
                 class="max-w-20 max-h-20">
             </div>
-            <h1 class="text-center text-5xl my-6 text-white">{{ $company->name }}</h1>
         </div>
         <div class="max-w-[750px] mx-auto">
             <div class="flex flex-col items-center justify-center text-xl gap-y-3">
                 <div class="border rounded-md p-5 w-full flex flex-col md:flex-row items-center gap-2">
                     <strong>Email: </strong>
-                    <p class="break-all md:break-normal">{{ $company->email }}</p>
+                    <a href="mailto:{{ $company->email }}" class="break-all md:break-normal">{{ $company->email }}</a>
                 </div>
                 <div class="border rounded-md p-5 w-full flex flex-col md:flex-row items-center gap-2">
                     <strong>Website: </strong><a href="{{ $company->website }}" target="_blank" class="url">{{ $company->website }}</a>

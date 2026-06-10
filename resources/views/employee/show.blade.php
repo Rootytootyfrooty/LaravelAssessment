@@ -1,8 +1,5 @@
 <x-layout title="{{ $employee->first_name }} {{ $employee->last_name }}">
-    <div class="max-w-8/10 mx-auto flex-col">
-        <div class="flex items-center py-2 gap-x-4 justify-center">
-            <h1 class="text-center text-5xl my-6 text-white">{{ $employee->first_name }} {{ $employee->last_name }}</h1>
-        </div>
+    <div class="max-w-8/10 mx-auto flex-col mt-20">
         <div class="p-3 max-w-[750px] mx-auto">
             <div class="flex flex-col items-center justify-center text-xl gap-4 text-center">
                 <div class="border rounded-md p-3 md:p-5 w-full flex flex-col md:flex-row gap-2">

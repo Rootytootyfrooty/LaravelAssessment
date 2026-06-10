@@ -51,9 +51,8 @@ class CompanyController extends Controller
         );
 
 
-        return redirect()->route('company.index');
+        return redirect()->route('company.index')->with('success', 'New company added');
         }
-        //return to_route('company.index');
 
 
     public function update(Company $company, Request $request) {
@@ -75,12 +74,12 @@ class CompanyController extends Controller
                 'public'
             );
         }
-        return redirect()->route('company.show', $company);
+        return redirect()->route('company.show', $company)->with('success', 'Company record updated');
     }
 
     public function destroy(Company $company) {
         $company->delete();
 
-        return to_route('company.index');
+        return to_route('company.index')->with('success', 'Company record deleted');
     }
 }

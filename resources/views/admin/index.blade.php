@@ -1,31 +1,27 @@
 <x-layout title="Login">
-    <div class="flex min-h-[calc(100dvh-4rem)] items-center justify-center px-4">
-        <form action="{{ route('login') }}" method="POST" class="mt-10 space-y-4">
+    <div class="flex min-h-[calc(100dvh-200px)] items-center justify-center px-4">
+
+        <form action="{{ route('login') }}" method="POST" class="space-y-4 mb-30">
             @csrf   
-            <div class="w-full max-w-md">
-                <div class="text-center">
-                    <h1 class="text-3xl font-bold tracking-tight text-white">Login</h1>
-                </div>
-            </div>
             <div class="space-y-2">
-                <label for="email" class="label">Email: </label>
+                <label for="email" class="label"><span aria-hidden="true" class="-mr-1">*</span>Email: </label>
                 <input type="email" id="email" class="input" name="email" data-test="email">
+                @if ($errors->has('email'))
+                    <p class="text-error text-center">{{ $errors->first('email') }}</p>
+                @endif
             </div>
+
             <div class="space-y-2">
-                <label for="password" class="label">Password: </label>
+                <label for="password" class="label"><span aria-hidden="true" class="-mr-1">*</span>Password: </label>
                 <input type="password" id="password" class="input" name="password" data-test="password">
+                @if ($errors->has('password'))
+                    <p class="text-error text-center">{{ $errors->first('password') }}</p>
+                @endif
             </div>
+            <p class="text-base-content/70 italic">Required fields are marked with an asterisk</p>
 
             <button type="submit" class="btn mt-2 h-10 w-full" data-test="login-button">Login</button>
-            @if ($errors->any())
-                <div>
-                    @foreach ($errors->all() as $error)
-                        <p class="text-error">{{ $error }}</p>
-                    @endforeach
-                </div>
-            @endif
 
-            
+        </form>
     </div>
-</form>
 </x-layout>

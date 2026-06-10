@@ -2,8 +2,8 @@ const openModalBtn = document.getElementById('open-modal');
 const modal = document.getElementById('modal');
 const closeModalBtn = document.getElementById('close-modal');
 const smallOpenModalBtn = document.getElementById('open-modal-small')
-//modals on: employees.index, companies.index, company/id, employee/id
 
+//modals on: employees.index, companies.index, company/id, employee/id
 if (openModalBtn) {
     openModalBtn.addEventListener("click", () => {
     modal.style.display = "block";
@@ -19,8 +19,14 @@ if (modal?.dataset.openonError === "1") {
     modal.style.display = "block";
 }
 
-//options on: companies.index, employees.index
+//for the mobile view
+if (smallOpenModalBtn) {
+    smallOpenModalBtn.addEventListener("click", () => {
+        modal.style.display = "block";
+    });
+}
 
+//sorting options styling on: companies.index, employees.index
 const optionsBtn = document.getElementById('more-options-btn');
 const options = document.getElementById('more-options');
 if (optionsBtn) {
@@ -33,8 +39,12 @@ if (optionsBtn) {
         }
     });
 }
-if (smallOpenModalBtn) {
-    smallOpenModalBtn.addEventListener("click", () => {
-        modal.style.display = "block";
-    });
+
+//success message timeouts
+const successMsg = document.getElementById('success-msg');
+
+if (successMsg) {
+    setTimeout(() => {
+        successMsg.style.display = 'none';
+    }, 3000);
 }

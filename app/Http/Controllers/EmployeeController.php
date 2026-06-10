@@ -35,7 +35,6 @@ class EmployeeController extends Controller
     }
 
     public function store(Request $request) {
-        //dd($request);
         $validated = $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
@@ -47,7 +46,7 @@ class EmployeeController extends Controller
         Employee::create($validated);
 
 
-        return redirect()->route('employee.index');
+        return redirect()->route('employee.index')->with('success', 'New employee added');
         }
 
     public function update(Request $request, Employee $employee) {
@@ -61,12 +60,12 @@ class EmployeeController extends Controller
 
     $employee->update($validated);
 
-    return redirect()->route('employee.show', $employee);
+    return redirect()->route('employee.show', $employee)->with('success', 'Employee record updated');
     }
     public function destroy(Employee $employee) {
         //dd($employee);
         $employee->delete();
 
-        return to_route('employee.index');
+        return to_route('employee.index')->with('success', 'Employee record deleted');
     }
 }
