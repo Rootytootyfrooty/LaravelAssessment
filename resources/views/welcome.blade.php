@@ -1,7 +1,7 @@
 <x-layout title="Welcome">
-    <div class="max-w-8/10 mx-auto flex-col items-center justify-center text-center p-5 mt-20">
+    <div class="mx-auto flex-col items-center justify-center text-center p-5 mt-20">
         @guest
-            <div class="my-auto text-white text-2xl">
+            <div class="my-auto text-2xl">
                 <p>Please <a href="/login" class="underline">log in</a> to continue</p>
             </div>
         @endguest

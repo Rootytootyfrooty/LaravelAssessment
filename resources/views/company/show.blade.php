@@ -1,7 +1,7 @@
 <x-layout title="{{ $company->name }}">
     <div class="max-w-8/10 mx-auto flex-col">
         <div class="flex items-center py-2 my-4 gap-x-4 justify-center">
-            <div class="fill-white my-auto text-white">
+            <div class="fill-white my-auto">
                 <img 
                 src="{{ asset('storage/icons/' . $company->id . '.png') }}" 
                 alt="Company Logo for {{ $company->name }}"
@@ -24,7 +24,7 @@
                 <button id="open-modal" class="btn btn-accent ml-auto mr-0">Edit</button>
             </div>
             <div class="mt-4 p-2 w-full text-2xl">
-                <a>{{ $company->employees_count }} employees:</a>
+                <a>{{ $company->employees_count }} employee{{ ($company->employees_count === 1) ? '' : 's' }}:</a> 
             </div>
             <div class="mt-5 [&>*:nth-child(even)]:bg-gray-500 [&>*:nth-child(odd)]:bg-gray-700">
                 @foreach ($company->employees as $employee)

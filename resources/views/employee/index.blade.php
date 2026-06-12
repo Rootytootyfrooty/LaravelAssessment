@@ -21,5 +21,5 @@
     <div class="mx-auto">
         {{ $employees->links() }}
     </div>
-    <x-cards.employee-modal :companies="$companies" />
+    <x-cards.modal :companies="$companies" />
 </x-layout>

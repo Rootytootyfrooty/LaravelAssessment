@@ -15,7 +15,7 @@ test('it adds a new employee', function () {
 
         visit('/employees')
         ->assertSee('Employees')
-        ->click('@open-employee-modal')
+        ->click('@open-modal')
         ->assertVisible('@submit-employee-btn')
         ->fill('input[name="first_name"]', 'name')
         ->fill('last_name', 'last-name')

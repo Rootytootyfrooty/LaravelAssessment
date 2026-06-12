@@ -7,18 +7,23 @@
         <title>{{ $title }}</title>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body>
+    <body class="h-screen flex flex-col">
+        {{-- Empty script tag because FOUC still an issue on FireFox --}}
+        <script>0</script>
         <header class="sticky top-0 z-50">
             <x-layout.nav :title="$title" />
         </header>
         <main>
-            <h1 class="text-ghost text-4xl text-white text-center mt-8 mb-3">{{ $title }}</h1>
+            <h1 class="text-4xl text-center mt-8 mb-3">{{ $title }}</h1>
             {{ $slot }}
         </main>
         @session('success')
-            <div id="success-msg" class="bg-green-700 min-w-[250px] text-center p-4 rounded-md text-success-content/150 text-xl absolute left-1/2 lg:left-7/8 top-1/8 transform -translate-x-1/2 -translate-y-1/2">
+            <div id="success-msg" 
+                class="bg-green-700 min-w-[250px] text-center p-4 rounded-md text-xl absolute left-1/2 lg:left-6/8 top-1/8 -translate-y-1/8
+                opacity-0 transition-all duration-300 ease-in">
                 {{ $value }}
             </div>
         @endsession
+        <x-layout.footer />
     </body>
 </html>

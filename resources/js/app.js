@@ -6,15 +6,26 @@ const smallOpenModalBtn = document.getElementById('open-modal-small')
 //modals on: employees.index, companies.index, company/id, employee/id
 if (openModalBtn) {
     openModalBtn.addEventListener("click", () => {
-    modal.style.display = "block";
-});}
+        modal.classList.remove('hidden');
 
-if (closeModalBtn) {
-    closeModalBtn.addEventListener("click", () => {
-        modal.style.display = "none";
+        setTimeout(() => {
+            modal.classList.remove('opacity-0', '-translate-y-4', 'translate-x-4');
+            modal.classList.add('opacity-100', 'translate-y-0', 'translate-x-0');
+        }, 100);
     });
 }
 
+if (closeModalBtn) {
+    closeModalBtn.addEventListener("click", () => {
+        modal.classList.add('opacity-0', '-translate-y-4', 'translate-x-4');
+        modal.classList.remove('opacity-100', 'translate-y-0', 'translate-x-0');
+        
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 300);
+    });
+}
+//idk if this does anything any more
 if (modal?.dataset.openonError === "1") {
     modal.style.display = "block";
 }
@@ -40,10 +51,12 @@ if (optionsBtn) {
     });
 }
 
-//success message timeouts
+//success message timeout/transition
 const successMsg = document.getElementById('success-msg');
 
 if (successMsg) {
+    successMsg.classList.remove('opacity-0');
+    successMsg.classList.add('opacity-100', '-translate-x-1/2');
     setTimeout(() => {
         successMsg.style.display = 'none';
     }, 3000);

@@ -2,10 +2,10 @@
 
   <div class="navbar-start">
 
-    <x-layout.nav-link href="/companies" style="mx-4 btn hidden md:block pt-2" color="primary" :active="request()->is('companies')">
+    <x-layout.nav-link href="/companies" color="bg-primary" :active="request()->is('companies')">
       Companies
     </x-layout.nav-link>
-    <x-layout.nav-link href="/employees" style="mx-4 btn hidden md:block pt-2" color="secondary" :active="request()->is('employees')">
+    <x-layout.nav-link href="/employees" color="bg-secondary" :active="request()->is('employees')">
       Employees
     </x-layout.nav-link>
 
@@ -58,14 +58,15 @@
 
   </div>
 
-  <div class="navbar-center flex flex-col">
-    <a href="/" class="btn btn-ghost border border-border text-xl text-white">Home</a>
+  <div class="navbar-center">
+    <x-layout.nav-small-link href="/" :active="request()->is('/')">Home</x-layout.nav-small-link>
+    {{-- <a href="/" class="btn btn-ghost border border-border text-xl">Home</a> --}}
   </div>
 
   <div class="navbar-end">
 
     @guest
-    <x-layout.nav-link href="/login" style="mx-4 btn hidden md:block pt-2" color="accent" :active="request()->is('login')">
+    <x-layout.nav-link href="/login" color="bg-accent" :active="request()->is('login')">
       Login
     </x-layout.nav-link>
     @endguest
@@ -79,7 +80,7 @@
       </button>
       @endif
       @if (request()->routeIs('employee.index'))
-      <button id="open-modal" class="btn text-success-content bg-success" data-test="open-employee-modal">
+      <button id="open-modal" class="btn text-success-content bg-success" data-test="open-modal">
         Add New Employee
       </button>
       @endif
