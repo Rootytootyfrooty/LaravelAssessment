@@ -12,18 +12,18 @@ class EmployeeController extends Controller
 {
     public function index(Request $request)
     {
-        //dd('index method hit', $request->all());
         $companies = Company::all();
-
+    
         $sort = $request->query('sort', 'latest');
+        $search = $request->query('search');
 
         $employees = Employee::with('company')
+            ->search($search)
             ->sort($sort)
             ->paginate(10)
             ->withQueryString();
         
-        //dd($sort);
-        return view('employee.index', compact('employees', 'sort', 'companies'));
+        return view('employee.index', compact('employees', 'sort', 'companies', 'search'));
     }
 
     public function show(Employee $employee, Company $companies)
@@ -63,7 +63,7 @@ class EmployeeController extends Controller
     return redirect()->route('employee.show', $employee)->with('success', 'Employee record updated');
     }
     public function destroy(Employee $employee) {
-        //dd($employee);
+
         $employee->delete();
 
         return to_route('employee.index')->with('success', 'Employee record deleted');

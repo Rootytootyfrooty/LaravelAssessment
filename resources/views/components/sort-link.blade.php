@@ -1,8 +1,8 @@
 @props(['active' => false, 'option'])
 <a 
     class="btn{{ $active ? ' bg-blue-800' : '' }}" 
-    href="?sort={{ $option }}"
-    aria-current="{{ $active ? 'page' : 'false' }}"
+    href="{{ request()->fullUrlWithQuery(['sort' => $option]) }}"
+    {!! $active ? 'aria-current="true"' : '' !!}
     {{ $attributes }}
     >
     {{ $slot }}

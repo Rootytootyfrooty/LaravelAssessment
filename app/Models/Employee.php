@@ -35,8 +35,25 @@ class Employee extends Model
                 ->join('companies', 'employees.company_id', '=', 'companies.id')
                 ->orderBy('companies.name', 'desc')
                 ->select('employees.*'),
+            
 
             default => $query->orderBy('created_at', 'desc'),
         };
+    }
+    public function scopeSearch($query, ?string $search) {
+
+            if (!$search) {
+                return $query;
+            }
+
+            $search = trim($search);
+
+            return $query
+            ->where('first_name', 'LIKE', "%{$search}%")
+            ->orWhere('last_name', 'LIKE', "%{$search}%")
+            ->orWhere('employees.email', 'LIKE', "%{$search}%")
+            ->orWhereHas('company', function ($query) use ($search) {
+                $query->where('name', 'LIKE', "%{$search}%");
+            });
     }
 }

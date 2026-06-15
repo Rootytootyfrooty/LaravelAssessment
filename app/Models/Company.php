@@ -34,4 +34,18 @@ class Company extends Model
             default => $query->orderBy('created_at', 'desc'),
         };
     }
+
+    public function scopeSearch($query, ?string $search) {
+
+            if (!$search) {
+                return $query;
+            }
+
+            $search = trim($search);
+            
+            return $query
+            ->where('name', 'LIKE', "%{$search}%")
+            ->orWhere('website', 'LIKE', "%{$search}%")
+            ->orWhere('email', 'LIKE', "%{$search}%");
+    }
 }

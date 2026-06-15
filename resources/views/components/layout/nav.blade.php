@@ -2,10 +2,10 @@
 
   <div class="navbar-start">
 
-    <x-layout.nav-link href="/companies" color="bg-primary" :active="request()->is('companies')">
+    <x-layout.nav-link href="/companies" color="bg-primary" :active="request()->is('companies')" >
       Companies
     </x-layout.nav-link>
-    <x-layout.nav-link href="/employees" color="bg-secondary" :active="request()->is('employees')">
+    <x-layout.nav-link href="/employees" color="bg-secondary" :active="request()->is('employees')" >
       Employees
     </x-layout.nav-link>
 

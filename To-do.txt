@@ -8,6 +8,13 @@
         >add and edit company
         >log in
         >logout?
->aria current page label
->general accessibility
+    >aria current page label
+    >general accessibility
 >all the tests
+    >dynamic mobile nav buttons
+    >footer
+    >search bar for index pages
+    >search bar styling
+    >pageName=page
+>clean up scope sort eloquent
+>icons

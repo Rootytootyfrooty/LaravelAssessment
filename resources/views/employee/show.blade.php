@@ -2,11 +2,11 @@
     <div class="max-w-8/10 mx-auto flex-col mt-20">
         <div class="p-3 max-w-[750px] mx-auto">
             <div class="flex flex-col items-center justify-center text-xl gap-4 text-center">
-                <div class="p-3 md:p-5 w-full flex flex-col md:flex-row gap-2">
+                <div class="bg-black/20 rounded-md p-5 w-full flex flex-col md:flex-row items-center gap-2">
                     <strong>Email: </strong>
                     <p class="break-all md:break-normal">{{ $employee->email }}</p>
                 </div>
-                <div class="p-5 w-full flex flex-col md:flex-row gap-2 border-t border-b">
+                <div class="border rounded-md p-5 w-full flex flex-col md:flex-row items-center gap-2">
                     <strong>Telephone number: </strong>
                     <p class="break-all md:break-normal">{{ $employee->number }}</p>
                 </div>

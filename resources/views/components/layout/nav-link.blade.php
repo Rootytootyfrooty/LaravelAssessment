@@ -7,8 +7,8 @@ $bgClass = match ($color) {
 };
 @endphp
 <a 
-    class="{{ ' mx-4 btn hidden md:block pt-2 text-primary-content ' . ($active ? $bgClass : $color) }}" {{ $attributes }}
-    aria-current="{{ $active ? 'page' : 'false' }}"
+    class="{{ 'mx-4 btn hidden md:block pt-2 text-primary-content ' . ($active ? $bgClass : $color) }}" {{ $attributes }}
+    {!! $active ? 'aria-current="page"' : '' !!}
 >
     {{ $slot }}
 </a>

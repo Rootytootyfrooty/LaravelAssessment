@@ -1,7 +1,13 @@
 <x-layout title="Employees">
     <div class="max-w-8/10 mx-auto">
-        {{-- dd('index method hit', $request->all()); --}}
-        <x-sort :sort="$sort"/>
+        <x-sort :sort="$sort" :search="$search" />
+        <div class="flex justify-center">
+            @if($employees->count() === 0)
+                <p class="mt-20">Sorry, no results for "{{ $search }}"</p>
+                @else
+                <p class="mt-2">{{ $employees->total() }} result{{ $employees->total() > 1 ? 's' : '' }}</p>
+            @endif
+        </div>
     </div>
 
     <div class="grid md:grid-cols-2 gap-6 m-6 max-w-8/10 xl:max-w-[1150px] mx-auto">

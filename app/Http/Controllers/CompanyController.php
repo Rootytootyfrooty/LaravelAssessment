@@ -16,13 +16,15 @@ class CompanyController extends Controller
     {
         
         $sort = $request->query('sort', 'latest');
-
+        $search = $request->query('search');
+        
         $companies = Company::withCount('employees')
+            ->search($search)
             ->sort($sort)
             ->paginate(10)
             ->withQueryString();
         
-        return view('company.index', compact('companies', 'sort'));
+        return view('company.index', compact('companies', 'sort', 'search'));
     }
     public function show(Company $company)
     {
