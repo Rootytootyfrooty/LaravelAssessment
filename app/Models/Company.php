@@ -24,14 +24,14 @@ class Company extends Model
 
     public function scopeSort($query, string $sort) {
         return match ($sort) {
-            'latest' => $query->orderBy('created_at', 'desc'),
-            'oldest' => $query->orderBy('created_at', 'asc'),
-            'aToZ' => $query->orderBy('name', 'asc'),
+            'latest' => $query->latest(),
+            'oldest' => $query->oldest(),
+            'aToZ' => $query->orderBy('name'),
             'zToA' => $query->orderBy('name', 'desc'),
-            'employeesAsc' => $query->orderBy('employees_count', 'asc'),
+            'employeesAsc' => $query->orderBy('employees_count'),
             'employeesDesc' => $query->orderBy('employees_count', 'desc'),
 
-            default => $query->orderBy('created_at', 'desc'),
+            default => $query->latest(),
         };
     }
 

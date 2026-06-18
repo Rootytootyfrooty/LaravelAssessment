@@ -23,13 +23,13 @@ class Employee extends Model
     }
     public function scopeSort($query, string $sort) {
         return match ($sort) {
-            'latest' => $query->orderBy('created_at', 'desc'),
-            'oldest' => $query->orderBy('created_at', 'asc'),
-            'aToZ' => $query->orderBy('first_name', 'asc'),
+            'latest' => $query->latest(),
+            'oldest' => $query->oldest(),
+            'aToZ' => $query->orderBy('first_name'),
             'zToA' => $query->orderBy('first_name', 'desc'),
             'companiesAsc' => $query
                 ->join('companies', 'employees.company_id', '=', 'companies.id')
-                ->orderBy('companies.name', 'asc')
+                ->orderBy('companies.name')
                 ->select('employees.*'),
             'companiesDesc' => $query
                 ->join('companies', 'employees.company_id', '=', 'companies.id')
@@ -37,7 +37,7 @@ class Employee extends Model
                 ->select('employees.*'),
             
 
-            default => $query->orderBy('created_at', 'desc'),
+            default => $query->latest(),
         };
     }
     public function scopeSearch($query, ?string $search) {

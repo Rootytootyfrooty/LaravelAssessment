@@ -8,10 +8,10 @@
         <button id="more-options-btn" class="btn bg-gray-700 hover:bg-gray-600 flex items-center justify-center md:order-12">
             @if(!($sort === 'latest' || $sort === 'oldest'))
                 Fewer Options
-                <span aria-hidden="true" class="mb-1 rotate-180 md:rotate-90 md:mt-1.5 md:-ml-1">&#129175;</span>
+                <span aria-hidden="true" class="mb-1 rotate-180 lg:rotate-90 lg:mt-1.5 lg:-ml-1">&#129175;</span>
             @else
                 More Options
-                <span aria-hidden="true" class="mt-2 md:-rotate-90 md:mt-1 md:ml-1">&#129175;</span>
+                <span aria-hidden="true" class="mt-2 lg:-rotate-90 lg:mt-1 lg:ml-1">&#129175;</span>
             @endif
         </button>
 
@@ -21,8 +21,8 @@
             <x-sort-link option="zToA" :active="($sort === 'zToA')">Sort Z-A</x-sort-link>
 
             @if (request()->routeIs('employee.index'))
-                <x-sort-link option="companiesAsc" :active="($sort === 'companiesAsc')">Sort Company A-Z</x-sort-link>
-                <x-sort-link option="companiesDesc" :active="($sort === 'companiesDesc')">Sort Company Z-A</x-sort-link>
+                <x-sort-link option="companiesAsc" :active="($sort === 'companiesAsc')">Company A-Z</x-sort-link>
+                <x-sort-link option="companiesDesc" :active="($sort === 'companiesDesc')">Company Z-A</x-sort-link>
             @endif
             @if (request()->routeIs('company.index'))
                 <x-sort-link option="employeesAsc" :active="($sort === 'employeesAsc')">Employees Asc.</x-sort-link>
@@ -31,6 +31,7 @@
 
         </div>
     </div>
+
     <div class="mt-5">
         <form method="GET" class="flex flex-row justify-center">
             <input
@@ -47,4 +48,5 @@
             <button type="submit" class="btn rounded-none rounded-tr-lg rounded-br-lg">Search<button>
         </form>
     </div>
+    
 </div>

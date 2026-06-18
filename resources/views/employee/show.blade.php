@@ -1,19 +1,39 @@
-<x-layout title="{{ $employee->first_name }} {{ $employee->last_name }}">
+<x-layout :title="$employee->first_name . ' ' . $employee->last_name">
     <div class="max-w-8/10 mx-auto flex-col mt-20">
-        <div class="p-3 max-w-[750px] mx-auto">
-            <div class="flex flex-col items-center justify-center text-xl gap-4 text-center">
-                <div class="bg-black/20 rounded-md p-5 w-full flex flex-col md:flex-row items-center gap-2">
-                    <strong>Email: </strong>
-                    <p class="break-all md:break-normal">{{ $employee->email }}</p>
-                </div>
-                <div class="border rounded-md p-5 w-full flex flex-col md:flex-row items-center gap-2">
-                    <strong>Telephone number: </strong>
-                    <p class="break-all md:break-normal">{{ $employee->number }}</p>
-                </div>
-                <div class="p-5 w-full flex flex-col md:flex-row gap-2">
-                    <strong>Company: </strong>
-                    <a href="/companies/{{ $employee->company->id }}" class="break-all md:break-normal link-primary">{{ $employee->company->name }}</a>
-                </div>
+        <div class="max-w-[750px] mx-auto">
+            <div class="flex flex-col items-center justify-center text-xl gap-y-3">               
+                <x-cards.show
+                    name="Email"
+                    linkStart="mailto:"
+                    :hrefValue="$employee->email"
+                    iconShow="mail-envelope-closed" 
+                    iconHidden="mail-envelope-open"
+                    color="[&_path]:fill-blue-300"
+                    :spanValue="$employee->email"
+                    hiddenStyle=" -translate-y-1"
+                />
+                
+                <x-cards.show
+                    name="Telephone"
+                    linkStart="tel:"
+                    :hrefValue="$employee->number"
+                    iconShow="phone" 
+                    iconHidden="phone_in_talk"
+                    color="[&_path]:fill-red-500"
+                    :spanValue="$employee->number"
+
+                />
+                
+                <x-cards.show
+                    name="Company"
+                    linkStart="/companies/"
+                    :hrefValue="$employee->company->id"
+                    iconShow="building-o" 
+                    iconHidden="building"
+                    color="[&_path]:fill-gray-200"
+                    :spanValue="$employee->company->name"
+
+                />
             </div>
             @auth
             <div class="w-full flex justify-end mt-3">

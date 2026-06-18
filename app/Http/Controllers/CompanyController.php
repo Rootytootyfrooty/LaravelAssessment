@@ -1,14 +1,12 @@
 <?php
  
 namespace App\Http\Controllers;
- 
-use Illuminate\Support\Facades\DB;
-use Illuminate\View\View;
+
 use App\Models\Company;
-use App\Models\Employee;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\StoreCompanyRequest;
+use App\Http\Requests\UpdateCompanyRequest;
 
 class CompanyController extends Controller
 {
@@ -34,17 +32,9 @@ class CompanyController extends Controller
         ]);
     }
 
-    public function store(Request $request) {
-        
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('companies', 'email')],
-            'website' => ['required', 'string', 'url', 'max:255', Rule::unique('companies', 'website')],
-            'logo' => ['required', 'image', 'mimes:png', 'max:2048'],
-        ]);
+    public function store(StoreCompanyRequest $request) {
 
-
-        $company = Company::create($request->only('name', 'email', 'website'));
+        $company = Company::create($request->validated());
 
         $request->file('logo')->storeAs(
             'icons',
@@ -57,15 +47,9 @@ class CompanyController extends Controller
         }
 
 
-    public function update(Company $company, Request $request) {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('companies', 'email')->ignore($company)],
-            'website' => ['required', 'string', 'url', 'max:255', Rule::unique('companies', 'website')->ignore($company)],
-            'logo' => ['image', 'mimes:png', 'max:2048'],
-        ]);
+    public function update(Company $company, UpdateCompanyRequest $request) {
 
-        $company->update($request->only('name', 'email', 'website'));
+        $company->update($request->validated());
 
         if ($request->hasFile('logo')) {
             Storage::disk('public')->delete('icons/' . $company->id . '.png');

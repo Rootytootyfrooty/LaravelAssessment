@@ -60,7 +60,6 @@
 
   <div class="navbar-center">
     <x-layout.nav-small-link href="/" :active="request()->is('/')">Home</x-layout.nav-small-link>
-    {{-- <a href="/" class="btn btn-ghost border border-border text-xl">Home</a> --}}
   </div>
 
   <div class="navbar-end">

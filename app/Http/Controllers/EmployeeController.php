@@ -2,11 +2,11 @@
  
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreEmployeeRequest;
+use App\Http\Requests\UpdateEmployeeRequest;
 use App\Models\Company;
-use Illuminate\Support\Facades\DB;
 use App\Models\Employee;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class EmployeeController extends Controller
 {
@@ -34,34 +34,20 @@ class EmployeeController extends Controller
         return view('employee.show', compact('employee', 'companies'));
     }
 
-    public function store(Request $request) {
-        $validated = $request->validate([
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('employees', 'email')],
-            'number' => ['required', 'string', 'max:15', Rule::unique('employees', 'number')],
-            'company_id' => ['required', 'integer', 'exists:companies,id'],
-        ]);
+    public function store(StoreEmployeeRequest $request) {
 
-        Employee::create($validated);
-
+        Employee::create($request->validated());
 
         return redirect()->route('employee.index')->with('success', 'New employee added');
-        }
-
-    public function update(Request $request, Employee $employee) {
-    $validated = $request->validate([
-        'first_name' => ['required', 'string', 'max:255'],
-        'last_name' => ['required', 'string', 'max:255'],
-        'email' => ['required', 'string', 'email', 'max:255', Rule::unique('employees', 'email')->ignore($employee)],
-        'number' => ['required', 'string', 'max:15', Rule::unique('employees', 'number')->ignore($employee)],
-        'company_id' => ['required', 'integer', 'exists:companies,id'],
-    ]);
-
-    $employee->update($validated);
-
-    return redirect()->route('employee.show', $employee)->with('success', 'Employee record updated');
     }
+
+    public function update(UpdateEmployeeRequest $request, Employee $employee) {
+
+        $employee->update($request->validated());
+
+        return redirect()->route('employee.show', $employee)->with('success', 'Employee record updated');
+    }
+
     public function destroy(Employee $employee) {
 
         $employee->delete();

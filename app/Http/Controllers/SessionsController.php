@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Models\Company;
-use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class SessionsController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         return view('admin.index');
     }

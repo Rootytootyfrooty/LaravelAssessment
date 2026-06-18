@@ -40,13 +40,14 @@ if (smallOpenModalBtn) {
 //sorting options styling on: companies.index, employees.index
 const optionsBtn = document.getElementById('more-options-btn');
 const options = document.getElementById('more-options');
+
 if (optionsBtn) {
     optionsBtn.addEventListener("click", () => {
         options.classList.toggle("hidden");
         if (options.classList.contains('hidden')) {
-            optionsBtn.innerHTML = `More Options<span aria-hidden="true" class="mt-2 md:-rotate-90 md:mt-1 md:ml-1">&#129175;</span>`
+            optionsBtn.innerHTML = `More Options<span aria-hidden="true" class="mt-2 lg:-rotate-90 lg:mt-1 lg:ml-1">&#129175;</span>`
         } else {
-            optionsBtn.innerHTML = `Fewer Options<span aria-hidden="true" class="mb-1 rotate-180 md:rotate-90 md:mt-1.5 md:-ml-1">&#129175;</span>`
+            optionsBtn.innerHTML = `Fewer Options<span aria-hidden="true" class="mb-1 rotate-180 lg:rotate-90 lg:mt-1.5 lg:-ml-1">&#129175;</span>`
         }
     });
 }
@@ -61,3 +62,19 @@ if (successMsg) {
         successMsg.style.display = 'none';
     }, 3000);
 }
+
+//company show employee accordion
+const employeeShow = document.getElementById('employee-show');
+const employeeAll = document.getElementById('employee-all');
+const chevron = document.getElementById('chevron');
+
+if (employeeShow) {
+    employeeShow.addEventListener("click", () => {
+        if (employeeAll.style.maxHeight) {
+            employeeAll.style.maxHeight = null;
+        } else {
+            employeeAll.style.maxHeight = employeeAll.scrollHeight + 'px';
+        }
+    });
+}
+
