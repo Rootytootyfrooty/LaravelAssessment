@@ -24,7 +24,7 @@
             </x-cards.employee-card>
         @endforeach
     </div> 
-    <div class="mx-auto mb-3">
+    <div class="mx-auto mb-3 px-2">
         {{ $employees->links() }}
     </div>
     <x-cards.modal :companies="$companies" />

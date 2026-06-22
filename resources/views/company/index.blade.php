@@ -22,7 +22,7 @@
             </x-cards.company-card>
         @endforeach
     </div>
-    <div>
+    <div class="mx-auto mb-3 px-2">
         {{ $companies->links() }}
     </div>
     <x-cards.modal />

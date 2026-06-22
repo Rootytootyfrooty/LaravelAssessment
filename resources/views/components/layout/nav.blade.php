@@ -1,13 +1,14 @@
 <div class="navbar bg-base-100 shadow-sm">
 
   <div class="navbar-start">
-
+    @auth
     <x-layout.nav-link href="/companies" color="bg-primary" :active="request()->is('companies')" >
       Companies
     </x-layout.nav-link>
     <x-layout.nav-link href="/employees" color="bg-secondary" :active="request()->is('employees')" >
       Employees
     </x-layout.nav-link>
+    @endauth
 
     <div class="dropdown block md:hidden">
       
@@ -33,9 +34,9 @@
         @guest
         <li><x-layout.nav-small-link href="/login" :active="request()->is('login')">Login</x-layout.nav-small-link></li>
         @endguest 
+        @auth
         <li><x-layout.nav-small-link href="/companies" :active="request()->is('companies')">Companies</x-layout.nav-small-link></li>
         <li><x-layout.nav-small-link href="/employees" :active="request()->is('employees')">Employees</x-layout.nav-small-link></li>
-        @auth
         @if (request()->routeIs('company.index'))
         <li><button id="open-modal-small" class="text-xl">
           Add New Company
