@@ -19,7 +19,9 @@
 
             <x-form.form-pair name="website" label="Website" :model="$company" type="url"  class="input" />
 
-            <x-form.form-pair name="logo" label="Logo" :model="$company" type="file" accept="image/png" style="flex flex-col" />
+            <x-form.form-pair name="logo" label="Logo" :model="$company" type="file" accept="image/png" 
+                style="flex flex-col [&_input]:p-2 [&_input]:border [&_input]:border-base-content/0 [&_input]:hover:border-base-content/20 [&_input]:rounded-lg [&_input]:hover:cursor-pointer [&_input]:hover:bg-base-100" 
+            />
 
         @endif
 

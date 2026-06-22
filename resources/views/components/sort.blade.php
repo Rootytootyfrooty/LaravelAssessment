@@ -6,13 +6,14 @@
         <x-sort-link option="oldest" :active="($sort === 'oldest')">Sort By Oldest</x-sort-link>
 
         <button id="more-options-btn" class="btn bg-gray-700 hover:bg-gray-600 flex items-center justify-center md:order-12">
-            @if(!($sort === 'latest' || $sort === 'oldest'))
-                Fewer Options
-                <span aria-hidden="true" class="mb-1 rotate-180 lg:rotate-90 lg:mt-1.5 lg:-ml-1">&#129175;</span>
-            @else
-                More Options
-                <span aria-hidden="true" class="mt-2 lg:-rotate-90 lg:mt-1 lg:ml-1">&#129175;</span>
-            @endif
+            <span id="option-text">
+                @if(!($sort === 'latest' || $sort === 'oldest'))
+                    Fewer Options
+                @else
+                    More Options
+                @endif
+            </span>
+            <x-icon id="chevron" icon="chevron-down" class="-pr-1 mt-1 [&_path]:fill-white [&_svg]:w-[12px] [&_svg]:max-h-[12px]" />
         </button>
 
         <div id="more-options" class="flex flex-wrap justify-center gap-3 {{ !($sort === 'latest' || $sort === 'oldest') ? '' : 'hidden' }}">

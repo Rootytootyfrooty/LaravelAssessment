@@ -33,21 +33,32 @@ if (modal?.dataset.openonError === "1") {
 //for the mobile view
 if (smallOpenModalBtn) {
     smallOpenModalBtn.addEventListener("click", () => {
-        modal.style.display = "block";
+        modal.classList.remove('hidden');
+
+        setTimeout(() => {
+            modal.classList.remove('opacity-0', '-translate-y-4', 'translate-x-4');
+            modal.classList.add('opacity-100', 'translate-y-0', 'translate-x-0');
+        }, 100);
     });
 }
 
 //sorting options styling on: companies.index, employees.index
 const optionsBtn = document.getElementById('more-options-btn');
 const options = document.getElementById('more-options');
+const optionText = document.getElementById('option-text');
+const chevron = document.getElementById('chevron');
 
 if (optionsBtn) {
     optionsBtn.addEventListener("click", () => {
+        chevron.classList.toggle("rotate-180");
+        chevron.classList.toggle("mt-[6px]");
         options.classList.toggle("hidden");
+        chevron.classList.toggle("mt-1");
+        console.log(optionText.textContent);
         if (options.classList.contains('hidden')) {
-            optionsBtn.innerHTML = `More Options<span aria-hidden="true" class="mt-2 lg:-rotate-90 lg:mt-1 lg:ml-1">&#129175;</span>`
+            optionText.textContent = "More Options";
         } else {
-            optionsBtn.innerHTML = `Fewer Options<span aria-hidden="true" class="mb-1 rotate-180 lg:rotate-90 lg:mt-1.5 lg:-ml-1">&#129175;</span>`
+            optionText.textContent = "Fewer Options";
         }
     });
 }
@@ -66,10 +77,12 @@ if (successMsg) {
 //company show employee accordion
 const employeeShow = document.getElementById('employee-show');
 const employeeAll = document.getElementById('employee-all');
-const chevron = document.getElementById('chevron');
+
 
 if (employeeShow) {
     employeeShow.addEventListener("click", () => {
+        chevron.classList.toggle('rotate-180');
+        chevron.classList.toggle('mb-1');
         if (employeeAll.style.maxHeight) {
             employeeAll.style.maxHeight = null;
         } else {

@@ -36,11 +36,12 @@ class CompanyController extends Controller
 
         $company = Company::create($request->validated());
 
-        $request->file('logo')->storeAs(
-            'icons',
-            $company->id . '.png',
-            'public'
-        );
+        if ($request->hasFile('logo')) {
+            $request->file('logo')->move(
+                public_path('storage/icons'),
+                $company->id . '.png'
+            );
+        }
 
 
         return redirect()->route('company.index')->with('success', 'New company added');
@@ -52,12 +53,15 @@ class CompanyController extends Controller
         $company->update($request->validated());
 
         if ($request->hasFile('logo')) {
-            Storage::disk('public')->delete('icons/' . $company->id . '.png');
+                $oldPath = public_path('storage/icons/' . $company->id . '.png');
 
-            $request->file('logo')->storeAs(
-                'icons',
-                $company->id . '.png',
-                'public'
+            if (file_exists($oldPath)) {
+                unlink($oldPath);
+            }
+
+            $request->file('logo')->move(
+                public_path('storage/icons'),
+                $company->id . '.png'
             );
         }
         return redirect()->route('company.show', $company)->with('success', 'Company record updated');
