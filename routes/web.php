@@ -2,16 +2,13 @@
 
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SessionsController;
 use App\Models\Company;
 use App\Models\Employee;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    $companies = Company::all();
-    $employees = Employee::all();
-    return view('welcome', compact('companies', 'employees'));
-})->name('welcome');
+Route::get('/', [HomeController::class, 'index'])->name('welcome')->middleware('auth');
 
 Route::get('/companies', [CompanyController::class, 'index'])->name('company.index')->middleware('auth');
 Route::post('/companies/store', [CompanyController::class, 'store'])->name('company.store')->middleware('auth');

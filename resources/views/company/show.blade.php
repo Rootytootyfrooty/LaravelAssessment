@@ -1,5 +1,6 @@
-<x-layout :title="$company->name">
-    <div class="max-w-8/10 mx-auto flex-col">
+<x-layout :title="$company->name" :company="$company">
+    
+    <div class="max-w-8/10 mx-auto flex-col z-5">
         <div class="flex items-center py-2 my-4 gap-x-4 justify-center">
             <div class="fill-white my-auto">
                 <img 

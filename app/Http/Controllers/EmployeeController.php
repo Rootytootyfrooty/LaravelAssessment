@@ -14,7 +14,7 @@ class EmployeeController extends Controller
     {
         $companies = Company::all();
     
-        $sort = $request->query('sort', 'latest');
+        $sort = $request->query('sort', 'aToZ');
         $search = $request->query('search');
 
         $employees = Employee::with('company')

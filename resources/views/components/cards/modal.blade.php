@@ -45,12 +45,12 @@
                 <label for="company_id" class="label"><span aria-hidden="true" class="-mr-1">*</span>Company: </label>
                 <select name="company_id" id="company_id">
                     @if($employee->exists)
-                        @foreach ($companies as $company)
+                        @foreach ($companies->sortBy('name') as $company)
                             <option {{ ($employee->company->id) === $company->id ? 'selected' : '' }} value="{{ $company->id }}">{{ $company->name }}</option>
                         @endforeach
                     
                     @else
-                        @foreach ($companies as $company)
+                        @foreach ($companies->sortBy('name') as $company)
                             <option value="{{ $company->id }}">{{ $company->name }}</option>
                         @endforeach
                     @endif

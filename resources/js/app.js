@@ -91,3 +91,37 @@ if (employeeShow) {
     });
 }
 
+//delete company from index modal
+const deleteConfirm = document.querySelectorAll('.delete-confirmation-msg');
+const deleteCompanyBtn = document.querySelectorAll('.delete-company');
+const cancelDeleteBtn = document.querySelectorAll('.cancel-delete');
+const editCompanyBtn = document.querySelectorAll('.open-modal');
+
+if (deleteCompanyBtn) {
+    for (let i = 0; i < deleteCompanyBtn.length; i++) {
+        deleteCompanyBtn[i].addEventListener("click", () => {
+            deleteConfirm[i].classList.remove('hidden');
+            setTimeout(() => {
+                deleteConfirm[i].classList.remove('opacity-0');
+                deleteConfirm[i].classList.add('opacity-100', '-translate-x-1/2');
+            }, 50);
+        });
+    }
+    for (let i = 0; i < cancelDeleteBtn.length; i++) {
+        cancelDeleteBtn[i].addEventListener("click", () =>{
+            deleteConfirm[i].classList.add('opacity-0');
+            deleteConfirm[i].classList.add('hidden');
+            deleteConfirm[i].classList.remove('opacity-100', '-translate-x-1/2');
+        });
+    }
+    for (let i = 0; i < editCompanyBtn.length; i++) {
+        editCompanyBtn[i].addEventListener("click", () => {
+            modal.classList.remove('hidden');
+
+            setTimeout(() => {
+                modal.classList.remove('opacity-0', '-translate-y-4', 'translate-x-4');
+                modal.classList.add('opacity-100', 'translate-y-0', 'translate-x-0');
+            }, 100);
+        });
+    }
+}

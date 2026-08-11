@@ -1,14 +1,17 @@
-<div class="navbar bg-base-100 shadow-sm">
-
+@aware(['company'])
+<div class="navbar bg-base-100 shadow-sm max-w-[1150px] mx-auto">
   <div class="navbar-start">
-    @auth
-    <x-layout.nav-link href="/companies" color="bg-primary" :active="request()->is('companies')" >
-      Companies
-    </x-layout.nav-link>
-    <x-layout.nav-link href="/employees" color="bg-secondary" :active="request()->is('employees')" >
-      Employees
-    </x-layout.nav-link>
-    @endauth
+
+    @if (request()->is('companies/*'))
+    <img 
+      src="{{ asset('storage/icons/' . $company->id . '.png') }}" 
+      alt="Company Logo for {{ $company->name }}"
+      class="max-w-5 max-h-5"
+    >
+    <x-layout.nav-small-link href="/" :active="request()->is('/')">{{ $company->name }}</x-layout.nav-small-link>
+    @else
+    <x-layout.nav-small-link href="/" :active="request()->is('/')">Home</x-layout.nav-small-link>
+    @endif
 
     <div class="dropdown block md:hidden">
       
@@ -60,10 +63,32 @@
   </div>
 
   <div class="navbar-center">
-    <x-layout.nav-small-link href="/" :active="request()->is('/')">Home</x-layout.nav-small-link>
+    <div class="mx-4 hidden md:block">
+
+      @if (request()->routeIs('company.index'))
+      <button id="open-modal" class="btn btn-accent" data-test="open-company-modal">
+        Add New Company
+      </button>
+      @endif
+      @if (request()->routeIs('employee.index'))
+      <button id="open-modal" class="btn btn-accent" data-test="open-modal">
+        Add New Employee
+      </button>
+      @endif
+
+    </div>
   </div>
 
   <div class="navbar-end">
+
+    @auth
+    <x-layout.nav-link href="/companies" color="bg-primary" :active="request()->is('companies')" >
+      Companies
+    </x-layout.nav-link>
+    <x-layout.nav-link href="/employees" color="bg-secondary" :active="request()->is('employees')" >
+      Employees
+    </x-layout.nav-link>
+    @endauth
 
     @guest
     <x-layout.nav-link href="/login" color="bg-accent" :active="request()->is('login')">
@@ -72,30 +97,25 @@
     @endguest
     
     @auth
-    <div class="mx-4 hidden md:block">
-
-      @if (request()->routeIs('company.index'))
-      <button id="open-modal" class="btn bg-success text-success-content" data-test="open-company-modal">
-        Add New Company
-      </button>
-      @endif
-      @if (request()->routeIs('employee.index'))
-      <button id="open-modal" class="btn text-success-content bg-success" data-test="open-modal">
-        Add New Employee
-      </button>
-      @endif
-
+    
+    <div class="hidden md:block">
+      <div class="dropdown">
+        <a href="#" tabindex="0" role="button" data-bs-toggle="dropdown" class="btn btn-ghost dropdown-toggle">
+          Admin
+          <x-icon id="chevron" icon="chevron-down" class=" mt-1 -mr-1 [&_path]:fill-white [&_svg]:max-h-[10px]" />
+        </a>
+        <ul tabindex="-1" class="menu dropdown-content">
+          <li class="-ml-2">
+          <form action="/logout" method="POST" class="mx-4 hidden md:block flex flex-col justify-center">
+            @csrf
+              <button type="submit">
+                Logout
+              </button>
+            </form>
+          </li>
+        <ul>
+      </div>
     </div>
-
-    <form action="/logout" method="POST" class="mx-4 hidden md:block">
-      @csrf
-
-      <button type="submit" class="btn btn-warning">
-        Logout
-      </button>
-
-    </form>
-
     @endauth
 
   </div>

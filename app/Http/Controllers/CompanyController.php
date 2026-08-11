@@ -13,7 +13,7 @@ class CompanyController extends Controller
     public function index(Request $request)
     {
         
-        $sort = $request->query('sort', 'latest');
+        $sort = $request->query('sort', 'aToZ');
         $search = $request->query('search');
         
         $companies = Company::withCount('employees')

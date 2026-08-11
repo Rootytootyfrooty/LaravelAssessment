@@ -1,33 +1,46 @@
 @props(['name', 'email', 'website', 'employee_count', 'company'])
-<a href="/companies/{{ $company }}" class="flex flex-col justify-between border border-border rounded-lg px-5 lg:p-8 py-6 hover:scale-105 transition-hover duration-250 ease-in-out min-w-0">
-    <div class="flex items-center pb-6 gap-x-4">
-        <div class="fill-white max-w-20 max-h-20">
+<div
+    class="bg-red-700 min-w-[250px] text-center p-4 rounded-md text-xl absolute left-1/2 lg:left-1/2 top-1/2 -translate-y-1/2
+    opacity-0 transition-all duration-300 ease-in delete-confirmation-msg hidden">
+    <form method="POST" action="{{ route('company.destroy', $company) }}" class="h-[25px]">
+        @csrf
+        @method('DELETE')
+        <p>Are you sure you want to delete {{ $name }}?</p>
+        <button class="btn btn-secondary h-[25px] w-[60px] p-1">Confirm</button>
+    </form>
+    <button class="btn btn-accent h-[25px] w-[60px] p-1 cancel-delete">Cancel</button>
+</div>
+<tr class="border-t">
+    <th scope="row" class="fill-white align-middle">
+        <div class="fill-white flex flex-row gap-x-2 p-3 items-center">
             <img 
                 src="{{ asset('storage/icons/' . $company . '.png') }}" 
                 alt="Company Logo for {{ $name }}"
+                class="max-w-5 max-h-5"
                 >
+                <a href="/companies/{{ $company }}">{{ $name }}</a>
         </div>
-        <h2 class="text-2xl md:text-3xl max-h-30 my-auto font-semibold">{{ $name }}</h2>
-    </div>
-    
-    <div class="max-w-full min-w-0 flex flex-col justify-center text-lg gap-y-2 md:truncate md:hover:whitespace-normal md:hover:overflow-visible">
+    </th>
 
-        <div class="flex flex-row items-center">
-            <x-icon icon="mail-envelope-closed" class="pr-3 mt-1 [&_path]:fill-blue-300" />
-            <div class="truncate">{{ $email }}</div>
+    <td scope="row" class="p-3 border-l border-r">
+        <div>{{ $email }}</div>
+    </td>
+
+    <td scope="row" class="p-3 border-r">
+        <div>{{ $website }}</div>
+    </td>
+
+    <td scope="row" class="p-3 border-r">
+        <div>
+            {{ $employee_count }}
         </div>
-
-        <div class="flex flex-row items-center">
-            <x-icon icon="sphere" class="pr-3 [&_path]:fill-emerald-300"/>
-            <div class="truncate">{{ $website }}</div>
+    </td>
+    <td scope="row" class="align-middle">
+        <div class="flex flex-row justify-center gap-x-1">
+            <a href="/companies/{{ $company }}" class="btn text-primary h-[25px] w-[60px] p-1 border border-primary">View</a>
+            <a href="/companies/{{ $company }}" class="btn text-accent h-[25px] w-[60px] p-1 open-modal border border-accent">Edit</a>
+            <button class="btn text-secondary h-[25px] w-[60px] p-1 delete-company border border-secondary">Delete</button>
         </div>
-
-        <div class="flex flex-row items-center">
-            <x-icon icon="people_outline" class="pr-3 mr-1 [&_path]:fill-yellow-100"/>
-            <div>
-                <span class="hidden sm:inline">Number of </span>Employees: <strong>{{ $employee_count }}</strong>
-            </div>
-        </div>
-
-    </div>
-</a>
+    </td>
+</tr>
+{{-- <x-form :company="$company"/> --}}

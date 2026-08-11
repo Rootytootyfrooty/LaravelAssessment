@@ -1,26 +1,41 @@
 @props(['firstName', 'lastName', 'company', 'email', 'number', 'id'])
-<a href="/employees/{{ $id }}" class="flex flex-col justify-between border border-border rounded-lg px-7 py-8 lg:p-9 hover:scale-105 transition-hover duration-250 ease-in-out break-words min-w-0">
-    <h2 class="text-3xl pb-6 text-center">{{ $firstName }} {{ $lastName }}</h2>
-
-
-        <div class="flex flex-col text-lg gap-y-2 max-w-full min-w-0 lg:ml-8">
-
-            <div class="flex flex-row items-center">
-                <x-icon icon="building-o" class="pr-3 [&_path]:fill-gray-200 [&_svg]:max-h-[25px]"/>
-                <div class="truncate">{{ $company }}</div>
-            </div>
-
-            <div class="flex flex-row items-center">
-                <x-icon icon="mail-envelope-closed" class="pr-3 mt-1 -ml-[7px] [&_path]:fill-blue-300" />
-                <div class="truncate">{{ $email }}</div>
-            </div>
-
-            <div class="flex flex-row items-center">
-                <x-icon icon="phone" class="pr-3 [&_path]:fill-red-400"/>
-                <div class="truncate">{{ $number }}</div>
-            </div>
-
+{{-- <x-cards.modal /> --}}
+<div
+    class="bg-red-700 min-w-[250px] text-center p-4 rounded-md text-xl absolute left-1/2 lg:left-1/2 top-1/2 -translate-y-1/2
+    opacity-0 transition-all duration-300 ease-in delete-confirmation-msg hidden">
+    <form method="POST" action="{{ route('employee.destroy', $id) }}" class="h-[25px]">
+        @csrf
+        @method('DELETE')
+        <p>Are you sure you want to delete {{ $firstName }} {{ $lastName }}?</p>
+        <button class="btn btn-secondary h-[25px] w-[60px] p-1">Confirm</button>
+    </form>
+    <button class="btn btn-accent h-[25px] w-[60px] p-1 cancel-delete">Cancel</button>
+</div>
+<tr class="border-t">
+    <th scope="row" class="fill-white align-middle">
+        <div class="fill-white flex flex-row gap-x-2 p-3 items-center">
+            <a href="/employees/{{ $id }}">{{ $firstName }} {{ $lastName }}</a>
         </div>
+    </th>
 
+    <td scope="row" class="p-3 border-l border-r">
+        <div>{{ $company }}</div>
 
-</a>
+    </td>
+
+    <td scope="row" class="p-3 border-r">
+        <div>{{ $email }}</div>
+
+    </td>
+
+    <td scope="row" class="p-3 border-r">
+        <div>{{ $number }}</div>
+    </td>
+    <td scope="row" class="align-middle">
+        <div class="flex flex-row justify-center gap-x-1">
+            <a href="/employees/{{ $id }}" class="btn text-primary h-[25px] w-[60px] p-1 border border-primary">View</a>
+            <a href="/employees/{{ $id }}" class="btn text-accent h-[25px] w-[60px] p-1 open-modal border border-accent">Edit</a>
+            <button class="btn text-secondary h-[25px] w-[60px] p-1 delete-company border border-secondary">Delete</button>
+        </div>
+    </td>
+</tr>

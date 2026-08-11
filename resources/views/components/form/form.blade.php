@@ -15,25 +15,37 @@
 
         <div class="mt-4 flex flex-row justify-between w-[309px]">
             <button id="close-modal" class="btn btn-grey btn-outlined">Cancel</button>
-            @if (request()->routeIs('company.index') || (request()->routeIs('company.show')))
-                @if($company->exists)
-                <form method="POST" action="{{ route('company.destroy', $company) }}">
-                    @csrf
-                    @method('DELETE')
-                    <button data-test="delete" class="btn btn-secondary btn-outlined">Delete</button>
-                </form>
-                @endif
-            @endif
-            @if (request()->routeIs('employee.index') || (request()->routeIs('employee.show')))
-                @if($employee->exists)
-                <form method="POST" action="{{ route('employee.destroy', $employee) }}">
-                    @csrf
-                    @method('DELETE')
-                    <button data-test="delete" class="btn btn-secondary btn-outlined">Delete</button>
-                </form>
+            @if (request()->routeIs('company.index') || (request()->routeIs('company.show') || request()->routeIs('employee.index') || (request()->routeIs('employee.show'))))
+                @if($company->exists || $employee->exists)
+                    <button data-test="delete" class="btn btn-secondary btn-outlined delete-company">Delete</button>
                 @endif
             @endif
         </div>
 
     </div>
+</div>
+<div
+    class="bg-red-700 min-w-[250px] text-center p-4 rounded-md text-xl absolute left-1/2 lg:left-1/2 top-1/2 -translate-y-1/2
+    opacity-0 transition-all duration-300 ease-in delete-confirmation-msg hidden z-51">
+    @if (request()->routeIs('company.index') || (request()->routeIs('company.show')))
+    @if($company->exists)
+        <p>Are you sure you want to delete {{ $company->name }}?</p>
+        <form method="POST" action="{{ route('company.destroy', $company) }}">
+            @csrf
+            @method('DELETE')
+            <button data-test="delete" class="btn btn-secondary btn-outlined">Delete</button>
+        </form>
+        @endif
+    @endif
+    @if (request()->routeIs('employee.index') || (request()->routeIs('employee.show')))
+        @if($employee->exists)
+        <p>Are you sure you want to delete {{ $employee->first_name }} {{ $employee->last_name }}?</p>
+        <form method="POST" action="{{ route('employee.destroy', $employee) }}">
+            @csrf
+            @method('DELETE')
+            <button data-test="delete" class="btn btn-secondary btn-outlined">Delete</button>
+        </form>
+        @endif
+    @endif
+    <button class="btn btn-accent h-[25px] w-[60px] p-1 cancel-delete">Cancel</button>
 </div>

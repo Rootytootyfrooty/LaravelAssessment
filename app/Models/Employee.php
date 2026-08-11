@@ -25,8 +25,8 @@ class Employee extends Model
         return match ($sort) {
             'latest' => $query->latest(),
             'oldest' => $query->oldest(),
-            'aToZ' => $query->orderBy('first_name'),
-            'zToA' => $query->orderBy('first_name', 'desc'),
+            'aToZ' => $query->orderBy('last_name'),
+            'zToA' => $query->orderBy('last_name', 'desc'),
             'companiesAsc' => $query
                 ->join('companies', 'employees.company_id', '=', 'companies.id')
                 ->orderBy('companies.name')
