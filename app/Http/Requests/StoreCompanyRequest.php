@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\File;
 
 class StoreCompanyRequest extends FormRequest
 {
@@ -27,7 +28,12 @@ class StoreCompanyRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('companies', 'email')],
             'website' => ['required', 'string', 'url', 'max:255', Rule::unique('companies', 'website')],
-            'logo' => ['required', 'image', 'mimes:png', 'max:2048'],
+            'logo' => ['required',
+            File::image()
+                ->min('200')
+                ->max('3 * 1024')
+                ->dimensions(Rule::dimensions()->maxWidth(500)->maxHeight(500)->ratio(1)),
+            ],
         ];
     }
 }

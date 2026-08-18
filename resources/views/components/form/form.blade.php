@@ -25,27 +25,29 @@
     </div>
 </div>
 <div
-    class="bg-red-700 min-w-[250px] text-center p-4 rounded-md text-xl absolute left-1/2 lg:left-1/2 top-1/2 -translate-y-1/2
+    class="bg-base-300 min-w-[250px] text-center p-4 rounded-md text-xl absolute left-1/2 lg:left-1/2 top-1/2 -translate-y-1/2
     opacity-0 transition-all duration-300 ease-in delete-confirmation-msg hidden z-51">
     @if (request()->routeIs('company.index') || (request()->routeIs('company.show')))
     @if($company->exists)
-        <p>Are you sure you want to delete {{ $company->name }}?</p>
+        <p class="mb-5">Are you sure you want to <span class="text-red-300">delete</span><strong> {{ $company->name }}</strong>?</p>
         <form method="POST" action="{{ route('company.destroy', $company) }}">
             @csrf
             @method('DELETE')
-            <button data-test="delete" class="btn btn-secondary btn-outlined">Delete</button>
+            <button type="submit" class="btn btn-secondary h-[25px] w-[80px] p-4 mr-1">Confirm</button>
+            <button type="button" class="btn h-[25px] w-[80px] p-4 cancel-delete ml-1">Cancel</button>
         </form>
         @endif
     @endif
     @if (request()->routeIs('employee.index') || (request()->routeIs('employee.show')))
         @if($employee->exists)
-        <p>Are you sure you want to delete {{ $employee->first_name }} {{ $employee->last_name }}?</p>
+        <p class="mb-5">Are you sure you want to <span class="text-red-300">delete</span><strong> {{ $employee->first_name }} {{ $employee->last_name }}? </strong></p>
         <form method="POST" action="{{ route('employee.destroy', $employee) }}">
             @csrf
             @method('DELETE')
-            <button data-test="delete" class="btn btn-secondary btn-outlined">Delete</button>
+            <button type="submit" class="btn btn-secondary h-[25px] w-[80px] p-4 mr-1">Confirm</button>
+            <button type="button" class="btn h-[25px] w-[80px] p-4 cancel-delete ml-1">Cancel</button>
         </form>
         @endif
     @endif
-    <button class="btn btn-accent h-[25px] w-[60px] p-1 cancel-delete">Cancel</button>
+    
 </div>

@@ -1,4 +1,4 @@
-<x-layout :title="$company->name" :company="$company">
+<x-layout :title="$company->name" :company="$company" :favicon="$company->id">
     
     <div class="max-w-8/10 mx-auto flex-col z-5">
         <div class="flex items-center py-2 my-4 gap-x-4 justify-center">
@@ -59,6 +59,7 @@
                 </div>
             </div>
         </div>
+        
         <x-cards.modal :company="$company" />
         @endauth
     </div>

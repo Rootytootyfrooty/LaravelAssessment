@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\URL;
 
 class CompanyController extends Controller
 {
@@ -43,7 +45,6 @@ class CompanyController extends Controller
             );
         }
 
-
         return redirect()->route('company.index')->with('success', 'New company added');
         }
 
@@ -68,8 +69,14 @@ class CompanyController extends Controller
     }
 
     public function destroy(Company $company) {
-        $company->delete();
 
-        return to_route('company.index')->with('success', 'Company record deleted');
+        if ($company->employees->count() < 1) {
+            
+            $company->delete();
+    
+            return to_route('company.index')->with('success', 'Company record deleted');
+        }
+
+        return to_route('company.index')->with('error', 'Error: Companies with employees cannot be deleted');
     }
 }

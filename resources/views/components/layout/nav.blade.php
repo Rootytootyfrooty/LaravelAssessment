@@ -1,5 +1,5 @@
 @aware(['company'])
-<div class="navbar bg-base-100 shadow-sm max-w-[1150px] mx-auto">
+<div class="navbar bg-base-100 shadow-sm max-w-[1150px] px-5 mx-auto">
   <div class="navbar-start">
 
     @if (request()->is('companies/*'))
@@ -12,8 +12,28 @@
     @else
     <x-layout.nav-small-link href="/" :active="request()->is('/')">Home</x-layout.nav-small-link>
     @endif
+    
+  </div>
 
-    <div class="dropdown block md:hidden">
+  <div class="navbar-center">
+    <div class="mx-4 hidden md:block">
+
+      @if (request()->routeIs('company.index'))
+      <button id="open-modal" class="btn btn-accent" data-test="open-company-modal">
+        Add New Company
+      </button>
+      @endif
+      @if (request()->routeIs('employee.index'))
+      <button id="open-modal" class="btn btn-accent" data-test="open-modal">
+        Add New Employee
+      </button>
+      @endif
+
+    </div>
+  </div>
+
+  <div class="navbar-end">
+    <div class="dropdown dropdown-end block md:hidden">
       
       <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
 
@@ -59,28 +79,6 @@
       </ul>
 
     </div>
-
-  </div>
-
-  <div class="navbar-center">
-    <div class="mx-4 hidden md:block">
-
-      @if (request()->routeIs('company.index'))
-      <button id="open-modal" class="btn btn-accent" data-test="open-company-modal">
-        Add New Company
-      </button>
-      @endif
-      @if (request()->routeIs('employee.index'))
-      <button id="open-modal" class="btn btn-accent" data-test="open-modal">
-        Add New Employee
-      </button>
-      @endif
-
-    </div>
-  </div>
-
-  <div class="navbar-end">
-
     @auth
     <x-layout.nav-link href="/companies" color="bg-primary" :active="request()->is('companies')" >
       Companies
@@ -99,16 +97,16 @@
     @auth
     
     <div class="hidden md:block">
-      <div class="dropdown">
+      <div class="dropdown dropdown-end">
         <a href="#" tabindex="0" role="button" data-bs-toggle="dropdown" class="btn btn-ghost dropdown-toggle">
           Admin
           <x-icon id="chevron" icon="chevron-down" class=" mt-1 -mr-1 [&_path]:fill-white [&_svg]:max-h-[10px]" />
         </a>
         <ul tabindex="-1" class="menu dropdown-content">
           <li class="-ml-2">
-          <form action="/logout" method="POST" class="mx-4 hidden md:block flex flex-col justify-center">
+          <form action="/logout" method="POST" class="mx-4 hidden md:block flex flex-col justify-center bg-base-100 hover:bg-base-300 hover:pointer-cursor">
             @csrf
-              <button type="submit">
+              <button type="submit" class="hover:cursor-pointer">
                 Logout
               </button>
             </form>

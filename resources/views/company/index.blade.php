@@ -9,35 +9,37 @@
             @endif
         </div>
     </div>
-    <div class="mx-5 lg:mx-auto max-w-[1150px] overflow-x-scroll border border-border rounded-t-md">
-        <table class="w-full border-collapse">
-            <thead>
-                <tr>
-                    <th scope="col" class="p-2" >Company Name</th>
-                    <th scope="col" class="p-2 border-l border-r">Email</th>
-                    <th scope="col" class="p-2 border-r">Website</th>
-                    <th scope="col" class="p-2 border-r">Employees</th>
-                    <th scope="col">Controls</th>
-                </tr>
-            </thead>
-            <tbody class="[&>*:nth-child(odd)]:bg-base-300">
-                @foreach ($companies as $company)
-                    <x-cards.company-card 
-                        :name="$company->name"
-                        :email="$company->email"
-                        :website="$company->website"
-                        :employee_count="$company->employees_count"
-                        :company="$company->id"
-                        class="shadow-xl max-w-2xl w-full max-h-[80dvh]"
-                        :whole-company="$company">
+    @if($companies->count() > 0)
+        <div class="mx-5 lg:mx-auto max-w-[1150px] overflow-x-scroll border border-border rounded-t-md">
+            <table class="w-full border-collapse">
+                <thead>
+                    <tr>
+                        <th scope="col" class="p-2" >Company Name</th>
+                        <th scope="col" class="p-2 border-l border-r">Email</th>
+                        <th scope="col" class="p-2 border-r">Website</th>
+                        <th scope="col" class="p-2 border-r">Employees</th>
+                        <th scope="col">Controls</th>
+                    </tr>
+                </thead>
+                <tbody class="[&>*:nth-child(odd)]:bg-base-300">
+                    @foreach ($companies as $company)
+                        <x-cards.company-card 
+                            :name="$company->name"
+                            :email="$company->email"
+                            :website="$company->website"
+                            :employee_count="$company->employees_count"
+                            :company="$company->id"
+                            class="shadow-xl max-w-2xl w-full max-h-[80dvh]"
+                            :whole-company="$company">
 
-                    </x-cards.company-card>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-    <div class="mx-auto mb-3 px-2">
-        {{ $companies->links() }}
-    </div>
+                        </x-cards.company-card>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        <div class="mx-auto mb-3 px-2">
+            {{ $companies->links() }}
+        </div>
+    @endif
     <x-cards.modal />
 </x-layout>
